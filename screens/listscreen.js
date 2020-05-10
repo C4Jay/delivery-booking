@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { Button, shadow } from 'react-native-paper';
 import axios from '../axioslist';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -87,13 +88,13 @@ const listScreen = props => {
     return (
         <View>
             <Button onPress={locationHandler}>set my location</Button>
-            <Button onPress={driversHandler}>view drivers</Button>
-            <Button onPress={showlist}>show</Button>
+            <Button onPress={driversHandler}>view drivers in my area</Button>
+           
 
             <FlatList
         data={driverslist}
         renderItem={({ item }) => {return (
-            <View style={styles.tile}><Text>{item.name}</Text><Text>{item.status}</Text></View> 
+            <TouchableOpacity onPress={() => {props.navigation.navigate('Mapview', {lat: item.location.lat, lng: item.location.lng})}}><View style={styles.tile}><Text>{item.name}</Text><Text>{item.status}</Text></View></TouchableOpacity> 
         )}} 
         keyExtractor={item => item.id}
       />
@@ -106,7 +107,9 @@ const styles = StyleSheet.create({
     tile: {
         height: 100,
         borderStyle: 'solid',
-        borderWidth: 1
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10
     }
 })
 

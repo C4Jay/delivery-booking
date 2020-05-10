@@ -3,11 +3,13 @@ import { createStackNavigator } from 'react-navigation-stack';
 import landingScreen from '../screens/landingscreen';
 import listScreen from '../screens/listscreen';
 import mapScreen from '../screens/mapscreen';
+import bookingscreen from '../screens/bookingscreen';
 
 const Delivernav = createStackNavigator({
     Makereq: landingScreen,
     List: listScreen,
-    Mapview: mapScreen
+    Mapview: mapScreen,
+    Checkout: bookingscreen
 },{
     defaultNavigationOptions : {
         headerStyle: {

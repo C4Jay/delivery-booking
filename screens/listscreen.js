@@ -62,6 +62,7 @@ const listScreen = props => {
             const hotel = []
             const obj = response.data
             for(let key in obj) {
+              if(obj[key].status == 'Online') {
               hotel.push({
                   id: key,
                   location: obj[key].location,
@@ -69,6 +70,7 @@ const listScreen = props => {
                   name: obj[key].name
               })
             }
+        }
 
             setdriverslist(hotel)
 

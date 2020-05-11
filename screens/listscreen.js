@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, Text, FlatList,  Alert } from 'react-native';
 import { Button, shadow } from 'react-native-paper';
 import axios from '../axioslist';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-
+import * as Maplocation from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
 const listScreen = props => {
 
@@ -74,6 +75,7 @@ const listScreen = props => {
         }
 
             setdriverslist(hotel)
+            console.log(hotel)
 
         })
         .catch(err => {
@@ -94,7 +96,7 @@ const listScreen = props => {
             <FlatList
         data={driverslist}
         renderItem={({ item }) => {return (
-            <TouchableOpacity onPress={() => {props.navigation.navigate('Mapview', {lat: item.location.lat, lng: item.location.lng})}}><View style={styles.tile}><Text>{item.name}</Text><Text>{item.status}</Text></View></TouchableOpacity> 
+            <TouchableOpacity onPress={() => {props.navigation.navigate('Mapview', {lat: item.location.lat, lng: item.location.lng, userloc: locationpicked, name: item.name})}}><View style={styles.tile}><Text>{item.name}</Text><Text>{item.status}</Text></View></TouchableOpacity> 
         )}} 
         keyExtractor={item => item.id}
       />

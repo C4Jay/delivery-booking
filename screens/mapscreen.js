@@ -41,7 +41,8 @@ const mapScreen = (props) => {
         
         </MapView>
         ) */
-
+    let lat = props.navigation.getParam('userloc').lat
+    let lng = props.navigation.getParam('userloc').lng
         
         
 
@@ -64,7 +65,7 @@ const mapScreen = (props) => {
             </MapView>
             
             <View>
-                <Button mode="contained" color="yellowgreen">book now</Button>
+                <Button mode="contained" onPress={() => {props.navigation.navigate('Checkout', {lat: lat, lng: lng, name: props.navigation.getParam('name')})}} color="yellowgreen">book now</Button>
             </View>
 
             </View>

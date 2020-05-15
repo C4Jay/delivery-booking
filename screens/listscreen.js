@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, FlatList,  Alert } from 'react-native';
+import { View, StyleSheet, Text, FlatList,  Alert, Picker } from 'react-native';
 import { Button, shadow } from 'react-native-paper';
 import axios from '../axioslist';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,6 +12,7 @@ const listScreen = props => {
     const [locationpicked, setlocationpicked] = useState()
     const [isfetching, setisfetching] = useState(null)
     const [driverslist, setdriverslist] = useState()
+    const [ecocentre, setecocentre] = useState("Dambulla");
 
     const Permissionverify = async () => {
         const result = await Permissions.askAsync(Permissions.LOCATION)
@@ -64,7 +65,7 @@ const listScreen = props => {
             const hotel = []
             const obj = response.data
             for(let key in obj) {
-              if(obj[key].status == 'Online') {
+              if(obj[key].status == 'Online' && obj[key].ecocentre == ecocentre) {
               hotel.push({
                   id: key,
                   location: obj[key].location,
@@ -92,6 +93,14 @@ const listScreen = props => {
             <Button onPress={locationHandler}>set my location</Button>
             <Button onPress={driversHandler}>view drivers in my area</Button>
            
+            <Picker
+        selectedValue={ecocentre}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setecocentre(itemValue)}
+      >
+        <Picker.Item label="Dambulla" value="Dambulla" />
+        <Picker.Item label="Thambuththegama" value="Thambuththegama" />
+      </Picker>
 
             <FlatList
         data={driverslist}

@@ -23,9 +23,19 @@ class bookingscreen extends Component {
     }
 
     
-    checkout() {
+    /* checkout() {
       // axios.patch('/drivers/' + this.props.navigation.getParam('name') + '/.json' , {time: this.state.time, booking: {lat : this.props.navigation.getParam('lat'), lng: this.props.navigation.getParam('lng')}})
       axios.patch('/drivers/' + this.props.navigation.getParam('name') + '/.json', {booking: {time: this.state.time, lat: this.props.navigation.getParam('lat'), lng: this.props.navigation.getParam('lng')}})
+      .then(response => {
+        console.log(response)
+      }).catch(err => {
+        console.log(err)
+      })
+    } */
+
+    checkout() {
+      // axios.patch('/drivers/' + this.props.navigation.getParam('name') + '/.json' , {time: this.state.time, booking: {lat : this.props.navigation.getParam('lat'), lng: this.props.navigation.getParam('lng')}})
+      axios.post('/farmerbookings.json', {farmername: "farmer_1",drivername: this.props.navigation.getParam('name'),farmernumer: '011698080',time: this.state.time, lat: this.props.navigation.getParam('lat'), lng: this.props.navigation.getParam('lng')})
       .then(response => {
         console.log(response)
       }).catch(err => {
